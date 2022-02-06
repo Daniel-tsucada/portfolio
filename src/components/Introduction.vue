@@ -2,7 +2,7 @@
     <section class="grid feature-grid-1">
     <div class="bg1 mobile-none show-on-desktop"></div>
     <div class="img1">
-      <img src="./image.png" alt="">
+      <img src="../image/image1.png" alt="">
     </div>
     <div class="feature-text feature-desc-01">
       <h4 class="subtitle">DANIEL TSUCADA</h4>
@@ -23,7 +23,7 @@ export default {
 
 .grid img {
      width:100%; 
-  height: auto; 
+  height: 100%; 
     box-shadow: -5px 5px 10px rgba(35,41,95,0.3);
 
     .mobile-none {

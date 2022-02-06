@@ -5,7 +5,7 @@
   <section class="about">
 
     <div class="about-left">
-      <img src="./image.png" alt="">
+      <img src="../views/image.png" alt="">
     </div>
 
     <div class="about-right">

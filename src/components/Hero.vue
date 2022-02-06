@@ -73,8 +73,7 @@ methods: {
 
 
 .area{
-    background: rgba(15, 1, 1, 1);  
-    background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);  
+    background: rgba(15, 1, 1, 1);   
     width: 100%;
     height:100vh;
     
