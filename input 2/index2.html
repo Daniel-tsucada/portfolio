@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <select name="inputLength" id="valueLength" onclick="optionLength();">
+      
+    </select>
+
+    <div id="inputText">
+        <input type="text">
+    </div>
+
+    <script>
+        var optionLengthValue = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+        function optionLength() {
+            var selectElement = document.getElementById("valueLength");
+            selectElement.innerHTML = ""; 
+
+            for (var i = 0; i < optionLengthValue.length; i++) {
+                var value = optionLengthValue[i];
+                var optionElement = document.createElement("option");
+                optionElement.value = value;
+                optionElement.textContent = value;
+                selectElement.appendChild(optionElement);
+            }
+        }
+
+        optionLength();
+
+    </script>
+</body>
+
+</html>

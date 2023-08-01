@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <select
+      name="numberOfPeople"
+      id="peopleValue"
+      onchange="changeInputLength();"
+    >
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+    <div id="inputField">
+      <input type="text" />
+    </div>
+    <script>
+      var inputValue = [document.querySelector("input").value];
+
+      function changeInputLength() {
+        var selectValue = document.getElementById("peopleValue").value;
+        var inputContainer = document.getElementById("inputField");
+        var currentInput = inputValue.length;
+
+        for (var i = currentInput; i < selectValue; i++) {
+          var input = document.createElement("input");
+          input.type = "text";
+          inputContainer.appendChild(input);
+          input.value = inputValue[i] || "";
+          inputValue.push(input.value);
+        }
+
+        for (var i = currentInput; i > selectValue; i--) {
+          inputContainer.removeChild(inputContainer.lastChild);
+          inputValue.pop();
+        }
+      }
+    </script>
+  </body>
+</html>

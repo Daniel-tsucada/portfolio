@@ -1,0 +1,94 @@
+<!DOCTYPE html> <!-- HTML5の宣言 -->
+<html> <!-- HTML文書のルート要素 -->
+<head> <!-- メタデータのコンテナー -->
+    <title>Pagination Demo</title> <!-- HTML文書のタイトル -->
+</head>
+<body> <!-- 表示コンテンツを含む要素 -->
+    <div id="pagination"></div> <!-- ページネーション表示用の領域 -->
+    <div id="items"></div> <!-- アイテム表示用の領域 -->
+    <button id="prev">前へ</button> <!-- 前ページに移動するためのボタン -->
+    <button id="next">次へ</button> <!-- 次ページに移動するためのボタン -->
+
+    <script> <!-- JavaScriptコードの開始 -->
+        // Paginationクラスの定義
+        class Pagination {
+            // コンストラクタ
+            constructor(items, itemsPerPage) {
+                this.items = items; // アイテムリストを保存
+                this.itemsPerPage = itemsPerPage; // 1ページ当たりのアイテム数を保存
+                this.currentPage = 1; // 現在のページ数を初期化
+                this.totalPages = Math.ceil(this.items.length / this.itemsPerPage); // 全ページ数を計算
+            }
+
+            // 指定したページのアイテムを取得し、ページネーションを表示するメソッド
+            getPage(page) {
+                this.currentPage = page; // 現在のページを更新
+
+                // 表示するアイテムの開始と終了インデックスを計算
+                const start = (this.currentPage - 1) * this.itemsPerPage;
+                const end = start + this.itemsPerPage;
+
+                // 開始と終了インデックスを元にアイテムを取得
+                const pageItems = this.items.slice(start, end);
+
+                this.displayPagination(); // ページネーションを表示
+
+                return pageItems; // 取得したアイテムを返す
+            }
+
+            // ページネーションを表示するメソッド
+            displayPagination() {
+                let startPage, endPage;
+
+                // 全ページ数が5以下の場合、全てのページを表示
+                // それ以外の場合、現在のページを中心に最大5ページを表示
+                if (this.totalPages <= 5) {
+                    startPage = 1;
+                    endPage = this.totalPages;
+                } else {
+                    startPage = Math.max(this.currentPage - 2, 1);
+                    endPage = Math.min(startPage + 4, this.totalPages);
+                    startPage = Math.max(endPage - 4, 1);
+                }
+
+                const pagination = [];
+                // 表示するページ番号を配列に追加
+                for (let i = startPage; i <= endPage; i++) {
+                    pagination.push(i);
+                }
+
+                // ページ番号を表示
+                document.getElementById('pagination').textContent = `Pagination: ${pagination.join(' ')}`;
+            }
+        }
+
+        // 50個のアイテムを生成
+        const items = Array.from({ length: 50 }, (_, i) => `Item ${i + 1}`);
+        const pagination = new Pagination(items, 5); // Paginationインスタンスを生成
+
+        // 初期ページを設定
+        updateItems(pagination.getPage(1));
+
+        // "前へ"ボタンのクリックイベントリスナーを設定
+        document.getElementById('prev').addEventListener('click', () => {
+            if (pagination.currentPage > 1) {
+                pagination.currentPage -= 5; // 現在のページを5つ減らす
+                updateItems(pagination.getPage(pagination.currentPage)); // ページを更新
+            }
+        });
+
+        // "次へ"ボタンのクリックイベントリスナーを設定
+        document.getElementById('next').addEventListener('click', () => {
+            if (pagination.currentPage < pagination.totalPages) {
+                pagination.currentPage += 5; // 現在のページを5つ増やす
+                updateItems(pagination.getPage(pagination.currentPage)); // ページを更新
+            }
+        });
+
+        // アイテムを表示する関数
+        function updateItems(items) {
+            document.getElementById('items').textContent = items.join(', ');
+        }
+    </script> <!-- JavaScriptコードの終了 -->
+</body>
+</html> <!-- HTML文書の終了 -->
